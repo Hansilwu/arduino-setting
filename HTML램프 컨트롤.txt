@@ -1,0 +1,47 @@
+#include <ESP8266WiFi.h>
+#include <ESP8266webServer.h>
+#include <TM1638.h>
+
+//Soft AP
+const char* side="신현수";
+const char* password ="12341234";
+
+TM1638 aa(D2, D1, D0);
+ESP8266WebServer server(80);   //1.서버 객체(인스턴스) 생성
+
+
+
+
+void setup() {
+  serial.begin(9600);
+  aa.setDisplayToDecNumber(1234, 0);
+  connectToWiFi();
+  server.on("/", handleRoot);  //2.핸들러 등혹(Request 처리)
+  server.begin(); //3.웹 서버 시작
+
+
+}
+void connectToWiFi()
+{
+  Serial.println("connecting to");
+  serial.println(ssid);
+  serial.println(password);
+
+  WiFi.softAP(ssid, password);
+
+  Serial.println("");
+  Serial.println("WiFi connected");
+  Serial.println(WiFi.localIP());
+}
+void loop() {
+  server.handleclint(): //4.추가적인 웹 서버 기능 수행
+
+
+}
+
+
+void handleRoot()
+{
+  server.send(200, "text/html", html);  //5.웹 브라우저에 html 보내기
+
+}
